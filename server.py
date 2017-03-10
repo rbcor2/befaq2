@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = ""
+
 VERIFY_TOKEN = ""
 
 def reply(user_id, msg):
@@ -17,10 +17,7 @@ def reply(user_id, msg):
 
 @app.route('/', methods=['GET'])
 def handle_verification():
-    if request.args['hub.verify_token'] == VERIFY_TOKEN:
-        return request.args['hub.challenge']
-    else:
-        return "Invalid verification token"
+    return request.args['hub.challenge']
 
 
 @app.route('/', methods=['POST'])
@@ -34,4 +31,4 @@ def handle_incoming_messages():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
