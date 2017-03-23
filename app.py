@@ -14,4 +14,4 @@ def hello_world():
 
 @app.route('/<var>')
 def jsonreturn(var):
-    return str(var)
+    return { "messages": [ {"text": "Welcome to our store!"}, {"text": "How can I help you?"} ] }
