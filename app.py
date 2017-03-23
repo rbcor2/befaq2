@@ -2,7 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup as bs
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 url = 'http://www.wifaqbd.org/result/mark-sheet.php'
@@ -31,7 +31,7 @@ def jsonreturn(var):
         name = " ".join(elems[1].text.split())
         father =  " ".join(elems[2].text.split())
         madrasa =  " ".join(elems[3].text.split())
-        msg = (name,father,madrasa,'total number: {}'.format(totalnumber),'division : {}'.format(division),'medha sthan: {}'.format(medha))
+        msg = (name,father,madrasa,'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
     except:
         msg = "কোন সমস্যা হইসে মনে হয় :/ "
 
