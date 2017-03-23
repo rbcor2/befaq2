@@ -1,35 +1,40 @@
-#python
-from flask import Flask, request
+#python3
+
 import requests
+from bs4 import BeautifulSoup as bs
+from flask import Flask
 
 app = Flask(__name__)
+url = 'http://www.wifaqbd.org/result/mark-sheet.php'
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+@app.route('/')
+def hello_world():
+    return 'working !'
+
+@app.route('/<var>')
+def jsonreturn(var):
+    payload = {'years':'2016',
+           'ClassName':1,
+           'Roll':var}
+    try:
+        r = requests.post(url,payload,headers=headers)
+        r.encoding = 'utf-8'
+        html = bs(r.content,'html.parser')
+        elems = html.select('div table tbody tr th[colspan]')
+        numbers = html.select('div table tbody tr td[class]')
+
+        totalnumber = numbers[32].text.split()[0]
+        division = numbers[33].text.split()[0]
+        medha = numbers[36].text.split()[0]
+
+        name = " ".join(elems[1].text.split())
+        father =  " ".join(elems[2].text.split())
+        madrasa =  " ".join(elems[3].text.split())
+        msg = (name,father,madrasa,'total number: {}'.format(totalnumber),'division : {}'.format(division),'medha sthan: {}'.format(medha))
+    except:
+        msg = "কোন সমস্যা হইসে মনে হয় :/ "
 
 
-VERIFY_TOKEN = ""
+    return '''{ "messages": [ {"text": "%s"} ] }''' % (str("\n".join(msg)))
 
-def reply(user_id, msg):
-    data = {
-        "recipient": {"id": user_id},
-        "message": {"text": msg}
-    }
-    resp = requests.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-    print(resp.content)
-
-
-@app.route('/', methods=['GET'])
-def handle_verification():
-    return request.args['hub.challenge']
-
-
-@app.route('/', methods=['POST'])
-def handle_incoming_messages():
-    data = request.json
-    sender = data['entry'][0]['messaging'][0]['sender']['id']
-    message = data['entry'][0]['messaging'][0]['message']['text']
-    reply(sender, message)
-
-    return "ok"
-
-
-if __name__ == '__main__':
-    app.run()
