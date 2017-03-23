@@ -39,7 +39,7 @@ def jsonreturn(var):
             t.append(numbers[n].text.strip())
             n+=3
         kitab = "বুখারি ১মঃ {}\nমুসলিম ১মঃ {} \nতিরমিযী ১মঃ {} \nআবু দাউদঃ {} \nবুখারী ২য়ঃ {} \nমুসলিম ২য়ঃ {} \nতিরমিযী ২য়ঃ {} \nনাসাঈ ও ইবনু মাজাহঃ {} \nত্বহাবীঃ {} \nমুআত্তানঃ {}".format(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8],t[9])
-        msg = (name,father,madrasa,markaj'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
+        msg = (name,father,madrasa,markaj,'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
         return jsonify({ "messages": [ {"text": "{}\n{}".format(msg[0], msg[1])},
                               {"text": "{}\n{}".format(msg[2], msg[3])},
                               {"text": "{}".format(kitab)},
@@ -48,5 +48,5 @@ def jsonreturn(var):
                        })
     
     except:
-        return jsonify({ "messages": [ {"text": "কোন সমস্যা হয়েছে মনে হয় :( \nআবার চেষ্টা করুন !"} ]}
+        return jsonify({ "messages": [ {"text": "কোন সমস্যা হয়েছে মনে হয় :( \nআবার চেষ্টা করুন !"} ]})
 
