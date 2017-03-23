@@ -33,11 +33,11 @@ def jsonreturn(var):
         madrasa =  " ".join(elems[3].text.split())
         msg = (name,father,madrasa,'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
     except:
-        msg = "কোন সমস্যা হইসে মনে হয় :/ "
-    return jsonify({ "messages": [ {"text": "1"},
-                                  {"text": "2"},
-                                  {"text": "3"},
-                                  {"text": "4"},
-                                  {"text": "5"},
-                                  {"text": "6"} ] 
+        msg = "কোন সমস্যা হইসে মনে হয় :/".split()
+    return jsonify({ "messages": [ {"text": "{}".format(msg[0])},
+                                  {"text": "{}".format(msg[1])},
+                                  {"text": "{}".format(msg[2])},
+                                  {"text": "{}".format(msg[3])},
+                                  {"text": "{}".format(msg[4])},
+                                  {"text": "{}".format(msg[5])} ] 
                    })
