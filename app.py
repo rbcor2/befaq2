@@ -34,4 +34,10 @@ def jsonreturn(var):
         msg = (name,father,madrasa,'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
     except:
         msg = "কোন সমস্যা হইসে মনে হয় :/ "
-    return jsonify({ "messages": [ {"text": "Welcome to our store!"}, {"text": "How can I help you?"} ] })
+    return jsonify({ "messages": [ {"text": "1"},
+                                  {"text": "2"},
+                                  {"text": "3"},
+                                  {"text": "4"},
+                                  {"text": "5"},
+                                  {"text": "6"} ] 
+                   })
