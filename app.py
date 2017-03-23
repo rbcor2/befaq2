@@ -10,7 +10,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleW
 
 @app.route('/')
 def hello_world():
-    return 'working !'
+    return '<a href="https://www.facebook.com/Befaq-1139031032800784/">কাজ করছে !!! </a>'
 
 @app.route('/<var>')
 def jsonreturn(var):
@@ -44,7 +44,7 @@ def jsonreturn(var):
                               {"text": "{}\n{}".format(msg[2], msg[3])},
                               {"text": "{}".format(kitab)},
                               {"text": "{}".format(msg[4])},
-                              {"text": "{}".format(msg[5], msg[6])} ] 
+                              {"text": "{}\n{}".format(msg[5], msg[6])} ] 
                        })
     
     except:
