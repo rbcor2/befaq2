@@ -10,14 +10,14 @@ headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleW
 #data validation function
 def data_validate(data):
     data = data.split('+')
-    if len(data) == 4 and data[0] == 'result' and data[2][0].lower() in 'tfsmihq':
+    if len(data) == 3 and data[1][0].lower() in 'tfsmihq':
         payload = {}
         try:
-            payload['Roll'] = int(data[1])
-            payload['years'] = int(data[3])
+            payload['Roll'] = int(data[0])
+            payload['years'] = int(data[2])
         except ValueError:
             return False
-        payload['ClassName'] = 'tfsmihq'.index(data[2][0].lower()) + 1
+        payload['ClassName'] = 'tfsmihq'.index(data[1][0].lower()) + 1
         return payload
     else :
         return False
