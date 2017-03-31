@@ -17,7 +17,7 @@ def data_validate(data):
             payload['years'] = int(data[2])
         except ValueError:
             return False
-        payload['ClassName'] = 'tfsmihq'.index(data[1][0].lower()) + 1
+        payload['ClassName'] = 'tfs_mihq'.index(data[1][0].lower()) + 1
         return payload
     else :
         return False
@@ -42,23 +42,22 @@ def beautify_result(content):
         return False
     elems = html.select('div table tbody tr th[colspan]')
     numbers = html.select('div table tbody tr td[class]')
-
-    totalnumber = numbers[32].text.strip()
-    division = numbers[33].text.strip()
-    medha = numbers[36].text.strip()
-
+     
     name = " ".join(elems[1].text.split())
     father =  " ".join(elems[2].text.split())
     madrasa =  " ".join(elems[3].text.split())
     markaj =  " ".join(elems[4].text.split())
-    t = []
-    n = 2
-    for i in range(10):
-        t.append(numbers[n].text.strip())
-        n+=3
-    kitab = "বুখারি ১মঃ {}\nমুসলিম ১মঃ {} \nতিরমিযী ১মঃ {} \nআবু দাউদঃ {} \nবুখারী ২য়ঃ {} \nমুসলিম ২য়ঃ {} \nতিরমিযী ২য়ঃ {} \nনাসাঈ ও ইবনু মাজাহঃ {} \nত্বহাবীঃ {} \nমুআত্তানঃ {}".format(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8],t[9])
+    
+    totalnumber = numbers[32].text.strip()
+    division = numbers[33].text.strip()
+    medha = numbers[36].text.strip()
+
+    kitab_list = [(numbers[i].text.strip(), numbers[i+1].text.strip()) for i in range(1,30,3) if numbers[i].text.strip()]
+    kitab = "\n".join([": ".join(kitab_list[i]) for i in range(len(kitab_list))])
+
     msg = (name,father,madrasa, markaj ,'মোট নাম্বার: {}'.format(totalnumber),'বিভাগ: {}'.format(division),'মেধাস্থান: {}'.format(medha))
-    return { "messages":        [ {"text": "{}\n{}".format(msg[0], msg[1])},
+    
+    return { "messages":    [ {"text": "{}\n{}".format(msg[0], msg[1])},
                               {"text": "{}\n{}".format(msg[2], msg[3])},
                               {"text": "{}".format(kitab)},
                               {"text": "{}".format(msg[4])},
@@ -69,7 +68,7 @@ def beautify_result(content):
 
 @app.route('/')
 def hello_world():
-    return '<a href="https://www.facebook.com/Befaq-1139031032800784/">কাজ করছে !!! </a>'
+    return '<a href="https://www.facebook.com/Befaq-1139031032800784/">    কাজ করছে !!! </a>'
 
 @app.route('/<var>')
 def jsonreturn(var):
