@@ -10,17 +10,19 @@ marhala_names = {'তাকমীল':'t', 'ফযীলত':'f', 'সানা�
 
 #data validation function
 def data_validate(data):
-    data = data.split('+')
-    if data[1] in marhala_names:
-        data[1] = marhala_names[data[1]] 
-    if len(data) == 3 and data[1][0].lower() in 'tfsmihq':
+    roll, *marhala, year = data.split('+')
+    marhala = ' '.join(marhala)
+    
+    if marhala in marhala_names:
+        marhala = marhala_names[marhala] 
+    if marhala[0].lower() in 'tfsmihq':
         payload = {}
         try:
-            payload['Roll'] = int(data[0])
-            payload['years'] = int(data[2])
+            payload['Roll'] = int(roll)
+            payload['years'] = int(year)
         except ValueError:
             return False
-        payload['ClassName'] = 'tfs_mihq'.index(data[1][0].lower()) + 1
+        payload['ClassName'] = 'tfs_mihq'.index(marhala[0].lower()) + 1
         return payload
     else :
         return False
