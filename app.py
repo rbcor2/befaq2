@@ -6,10 +6,13 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 url = 'http://www.wifaqbd.org/result/mark-sheet.php'
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+marhala_names = {'তাকমীল':'t', 'ফযীলত':'f', 'সানাবিয়া উলইয়া':'s', 'মুতাওয়াসসিতাহ':'m' , 'ইবতিদাইয়্যাহ':'i' , 'হিফযুল কুরআন':'h', 'ইলমুত তাজবীদ ওয়াল কিরাআত':'q'}
 
 #data validation function
 def data_validate(data):
     data = data.split('+')
+    if data[1] in marhala_names:
+        data[1] = marhala_names[data[1]] 
     if len(data) == 3 and data[1][0].lower() in 'tfsmihq':
         payload = {}
         try:
@@ -72,16 +75,19 @@ def hello_world():
 
 @app.route('/<var>')
 def jsonreturn(var):
-    payload = data_validate(var)
-    if payload:
-        result = grab_result(**payload)
-    else:
-        return jsonify({"messages": [{"text": "রোল, সন, মারহালার প্রথম অক্ষর ঠিকভাবে লিখে পাঠান! বিস্তারিত জানতে help লিখুন! "}]})
-    if result:
-        msg = beautify_result(result)
-    else:
-        return jsonify({"messages": [{"text": "বেফাকের ওয়েবসাইটে কোন সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন! বেফাকের ওয়েবসাইট ভিজিট করতে www.wifaqbd.org/result/ ঠিকানায় যান"}]})
-    if msg:
-        return jsonify(msg)
-    else:
-        return jsonify({"messages": [{"text": "রোল, সন, মারহালার প্রথম অক্ষর ঠিকভাবে লিখে পাঠান! বিস্তারিত জানতে help লিখুন! "}]})
+    try:
+        payload = data_validate(var)
+        if payload:
+            result = grab_result(**payload)
+        else:
+            return jsonify({"messages": [{"text": "রোল, সন, মারহালার প্রথম অক্ষর ঠিকভাবে লিখে পাঠান! বিস্তারিত জানতে help লিখুন! "}]})
+        if result:
+            msg = beautify_result(result)
+        else:
+            return jsonify({"messages": [{"text": "বেফাকের ওয়েবসাইটে কোন সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন! বেফাকের ওয়েবসাইট ভিজিট করতে www.wifaqbd.org/result/ ঠিকানায় যান"}]})
+        if msg:
+            return jsonify(msg)
+        else:
+            return jsonify({"messages": [{"text": "রোল, সন, মারহালার প্রথম অক্ষর ঠিকভাবে লিখে পাঠান! বিস্তারিত জানতে help লিখুন! "}]})
+    except:
+        return jsonify({"messages": [{"text": "কোন সমস্যা হয়েছে ! " }]})
