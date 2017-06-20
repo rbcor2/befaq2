@@ -42,10 +42,10 @@ def return_result(data):
         #সন যাচাই করা
         try:
             year = int(year)
-            if year not in [2012,2013,2014,2015,2016]:
-                return jsonify({"messages": [{"text": "সন 2012 থেকে 2016 এর মধ্যে হতে হবে "}]})
+            if year not in [2012,2013,2014,2015,2016, 2017]:
+                return jsonify({"messages": [{"text": "সন 2012 থেকে 2017 এর মধ্যে হতে হবে "}]})
         except ValueError:
-            return jsonify({"messages": [{"text": "সন সঠিক ভাবে লিখুন যেমন 2016"}]})
+            return jsonify({"messages": [{"text": "সন সঠিক ভাবে লিখুন যেমন 2017"}]})
         
         #পেলোড তৈরি করা যা দ্বারা বেফাকের ওয়েবসাইট থেকে রেজাল্ট আনা হবে
         payload = {}
