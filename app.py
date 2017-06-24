@@ -1,3 +1,6 @@
+from flask import Flask
+app = Flask(__name__)
+app.config['SECRETE_KEY'] = 'dfkjdlfk'
 from sqlalchemy import create_engine, Column, Integer, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -29,5 +32,13 @@ session.add(user)
 
 session.commit()
 
-for student in session.query(Student).all():
-    print(student.id)
+
+@app.route('/')
+def index():
+    l = []
+    for student in session.query(Student).all():
+        l.append(student)
+@app.route('/<usr>')
+def addusr(usr):
+    session.add(Student(usr, 34))
+    session.commit()
