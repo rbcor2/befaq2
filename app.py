@@ -41,7 +41,7 @@ def show():
     l = []
     for student in session.query(Student).all():
         l.append(student)
-    return l
+    return ' '.join(map(str,l))
         
 @app.route('/<usr>')
 def addusr(usr):
