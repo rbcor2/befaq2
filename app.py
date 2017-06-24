@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 app = Flask(__name__)
 app.config['SECRETE_KEY'] = 'dfkjdlfk'
 
@@ -38,10 +38,10 @@ def index():
     return 'alhamdulillah'
 @app.route('/show')
 def show():
-    l = []
+    l = {}
     for student in session.query(Student).all():
-        l.append(student)
-    return ' '.join(l)
+        l[student.name] = student.roll
+    return jsonify(l)
         
 @app.route('/<usr>')
 def addusr(usr):
