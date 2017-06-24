@@ -1,10 +1,11 @@
 from flask import Flask
 app = Flask(__name__)
 app.config['SECRETE_KEY'] = 'dfkjdlfk'
+
 from sqlalchemy import create_engine, Column, Integer, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-#engine = create_engine('sqlite:///student.db')
+
 engine = create_engine('postgres://mlxodpnnjrwuok:2b84fe1535ef25d6c561a4982b0128ebe6828c3280d8bf48ab214838f25c9958@ec2-54-228-235-185.eu-west-1.compute.amazonaws.com:5432/dsb4kb4rsfepb')
 Base = declarative_base()
 
@@ -32,13 +33,18 @@ session.add(user)
 
 session.commit()
 
-
 @app.route('/')
 def index():
+    return 'alhamdulillah'
+@app.route('/show')
+def show():
     l = []
     for student in session.query(Student).all():
         l.append(student)
+    return l
+        
 @app.route('/<usr>')
 def addusr(usr):
     session.add(Student(usr, 34))
     session.commit()
+    return '{} added'.format(usr)
