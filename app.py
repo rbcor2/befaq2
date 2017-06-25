@@ -43,8 +43,7 @@ def show():
         l[student.name] = student.roll
     return jsonify(l)
         
-@app.route('/<usr>')
-def addusr(usr):
-    session.add(Student(usr, 34))
-    session.commit()
-    return '{} added'.format(usr)
+@app.route('/add')
+def add():
+    import start
+    return 'added'
