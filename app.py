@@ -14,7 +14,7 @@ class Student(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(Text)
-    roll = Column(Integer, nullable=False)
+    roll = Column(Integer)
 
     def __init__(self, name, roll):
         self.name = name
