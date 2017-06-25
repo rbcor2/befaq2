@@ -41,4 +41,4 @@ def show():
 @app.route('/add')
 def add():
     import start
-    return 'added'
+    return 'all added'
