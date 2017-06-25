@@ -42,7 +42,7 @@ payload['years'] = 2017
 payload['ClassName'] = 2
 
 
-for i in range(1, 9):
+for i in range(1, 9022):
     payload['Roll'] = i
     #বেফাকের ওয়েবসাইট থেকে রেজাল্ট গ্রহন করা
     result = requests.post(result_page_url, payload, headers= headers)
