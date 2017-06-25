@@ -1,10 +1,6 @@
 import requests
 
 from bs4 import BeautifulSoup as bs
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-app.config['SECRETE_KEY'] = 'dfkjdlfk'
 
 from sqlalchemy import create_engine, Column, Integer, Text, JSON
 from sqlalchemy.ext.declarative import declarative_base
