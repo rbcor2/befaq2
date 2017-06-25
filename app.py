@@ -28,11 +28,6 @@ session = Session()
 
 Base.metadata.create_all(engine)
 
-user  = Student('sultan', 54)
-session.add(user)
-
-session.commit()
-
 @app.route('/')
 def index():
     return 'alhamdulillah'
