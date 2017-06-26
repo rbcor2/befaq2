@@ -43,7 +43,7 @@ def add():
     import start
     return 'all added'
 
-@app.route('/testbot/<s>')
-def testbot(s):
+@app.route('/testbot')
+def testbot():
     st = 'আমার \n সোনার \n বাংলা'
-    return jsonify({"messages": [{"text": "{} {}".format(st, s}]})
+    return jsonify({"messages": [{"text": "{} {}".format(st}]})
