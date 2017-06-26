@@ -17,7 +17,3 @@ def roll(r):
         return jsonify({"messages": [{"text": "{}".format(s.res)}]})
     else:
         return jsonify({"messages": [{"text": "result not found"}]})
-
-if __name__ == '__main__':
-    app.run()
-    
