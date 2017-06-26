@@ -5,8 +5,8 @@ from models import session, Result
 result_url = 'http://saharait.com/mark-sheet.php'
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
-start = 1
-stop = 100
+start = 101
+stop = 9021
 
 payload = {}
 payload['years'] = 2017
