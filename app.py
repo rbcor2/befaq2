@@ -17,3 +17,7 @@ def roll(r):
         return jsonify({"messages": [{"text": "{}".format(s.res)}]})
     else:
         return jsonify({"messages": [{"text": "result not found"}]})
+@app.route('/loaderio-503d750ec1cfeee8ab19ce83c39edf32/')
+def lodario():
+    return "loaderio-503d750ec1cfeee8ab19ce83c39edf32"
+           
