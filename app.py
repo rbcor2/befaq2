@@ -46,4 +46,4 @@ def add():
 @app.route('/testbot')
 def testbot():
     st = 'আমার \n সোনার \n বাংলা'
-    return jsonify({"messages": [{"text": "{} {}".format(st}]})
+    return jsonify({"messages": [{"text": "{} {}".format(st)}]})
