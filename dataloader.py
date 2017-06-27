@@ -1,8 +1,18 @@
 import requests
+import config
 from concurrent.futures import ThreadPoolExecutor
 
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
 from helper import beautify
-from models import session, Result
+from models import Result
+
+engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
 
 executor = ThreadPoolExecutor(1)
 
