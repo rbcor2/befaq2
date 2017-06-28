@@ -18,28 +18,22 @@ def roll(r):
     else:
         return jsonify({"messages": [{"text": "result not found"}]})
     
-@app.route('/<int:exec_len>/<int:start>/<int:stop>')
-def dataload(exec_len, start, stop):
+
+@app.route('/41033/<int:start>/<int:stop>')
+def dataload(start, stop):
     import dataloader
-    
-    s = start
-    val = stop-start
-    chunk = val//exec_len
-    
-    for i in range(exec_len-1):
-        dataloader.executor.submit(dataloader.loader, start, start+chunk)
-        start+=chunk
-    dataloader.executor.submit(dataloader.loader, start, stop+1)
-    
+    dataloader.executor.submit(dataloader.loader, start, stop)
     return """<html><center>data loading started in background...</br>
             with start value = {}</br>
             and stop value = {} </br>
-            and executor = {} </br>
             </br>
-            DO NOT HIT THIS URL AGEIN</html></center>""".format(s, stop, exec_len)
+            DO NOT HIT THIS URL AGEIN</html></center>""".format(start, stop)
 
+@app.route('/41033/models')
+def models():
+    import models
+    return 'models created'
 
 @app.route('/loaderio-503d750ec1cfeee8ab19ce83c39edf32/')
 def lodario():
     return "loaderio-503d750ec1cfeee8ab19ce83c39edf32"
-           
