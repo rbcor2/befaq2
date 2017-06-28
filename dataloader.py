@@ -14,7 +14,7 @@ Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
 
-executor = ThreadPoolExecutor(1)
+executor = ThreadPoolExecutor(10)
 
 result_url = 'http://saharait.com/mark-sheet.php'
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
